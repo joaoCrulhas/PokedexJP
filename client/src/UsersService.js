@@ -1,11 +1,14 @@
 /* eslint-disable */ 
 import axios from 'axios'
 
-const urlApi = `http://127.0.0.1:3000/api/v1/users`
-const urlApiAuth = `http://127.0.0.1:3000/api/v1/auth`
+// const urlApi = `http://127.0.0.1:3000/api/v1/users`
+// const urlApiAuth = `http://127.0.0.1:3000/api/v1/auth`
 const urlPokeApi = `https://pokeapi.co/api/v2/`
-// http://127.0.0.1:3000/api/v1/users/mypokemons/5bfa9bfc27a88c51abce3ad7
-// http://127.0.0.1:3000/api/v1/users/joao.crulhas@gmail.com
+const urlApi = `api/v1/users`
+const urlApiAuth = `api/v1/auth`
+// const urlPokeApi = `https://pokeapi.co/api/v2/`
+
+
 class UserService {
     // 
     // Create user 

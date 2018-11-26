@@ -51,7 +51,7 @@
                     label="Password:"
                     label-for="password">
         <b-form-input id="password"
-                      type="text"
+                      type="password"
                       v-model="form.password"
                       required
                       placeholder="Enter your password">
