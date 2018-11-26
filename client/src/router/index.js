@@ -13,6 +13,7 @@ import MyPokemons from '@/components/MyPokemons'
 Vue.use(Router)
 
 export default new Router({
+  
   routes: [
     {
       path: '/',

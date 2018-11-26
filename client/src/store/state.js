@@ -7,7 +7,7 @@ export default {
         password: '',
         _id: '',
     },
-    login:'',
+    login:false,
     token: '',
     pokemons: [],
     myPokemons: []

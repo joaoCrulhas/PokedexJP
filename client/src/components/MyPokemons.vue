@@ -19,19 +19,14 @@
             }
         },
         async created() {
-            // if(this.$store.getters.getMyPokemons.length === 0) { 
-            //     let myPokemonsAPI = await UserService.getMyPokemons(this.$store.state.user._id, this.$store.state.token)
-            //     myPokemonsAPI = myPokemonsAPI.data
-            //     this.myPokemons = myPokemonsAPI
-            //     this.$store.commit('MYPOKEMONS', this.myPokemons)
-            // } else {
-            //     // console.log(this.$store.getters.getMyPokemons)
-            //     this.myPokemons = this.$store.getters.getMyPokemons
-            // }
-                let myPokemonsAPI = await UserService.getMyPokemons(this.$store.state.user._id, this.$store.state.token)
-                myPokemonsAPI = myPokemonsAPI.data
-                this.myPokemons = myPokemonsAPI
-                this.$store.commit('MYPOKEMONS', this.myPokemons)
+                if (!this.$store.state.login) {
+                    this.$router.push('Login') 
+                } else {
+                    let myPokemonsAPI = await UserService.getMyPokemons(this.$store.state.user._id, this.$store.state.token)
+                    myPokemonsAPI = myPokemonsAPI.data
+                    this.myPokemons = myPokemonsAPI
+                    this.$store.commit('MYPOKEMONS', this.myPokemons)
+                }
         },
     }
 </script>

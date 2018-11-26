@@ -29,12 +29,16 @@
             }
         },
         async created() {
-            if (this.$store.getters.getPokemons.length === 0) {
-                let res = await UsersService.getAllPokemons()
-                this.$store.commit('POKEMONS', res.data.results)
-                this.pokemon.name = this.$store.getters.getRandomPokemon
+            if (!this.$store.state.login) {
+                this.$router.push('Login') 
             } else {
-                this.pokemon.name = this.$store.getters.getRandomPokemon
+                if (this.$store.getters.getPokemons.length === 0) {
+                    let res = await UsersService.getAllPokemons()
+                    this.$store.commit('POKEMONS', res.data.results)
+                    this.pokemon.name = this.$store.getters.getRandomPokemon
+                } else {
+                    this.pokemon.name = this.$store.getters.getRandomPokemon
+                }
             }
         },
         methods: {
