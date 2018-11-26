@@ -52,3 +52,11 @@ exports.getMyPokemons = async (req, res, next) => {
     }).select('created pokemonName idUser')
     res.status(200).json(myPokemons)
 }
+
+exports.checkEmailExist = async (req, res, next) => {
+    const email = req.params.email;
+    let user = await userModel.find({ email }, (error, doc) => {
+        doc
+    }).select('email -_id')
+    res.status(200).json(user[0])
+}

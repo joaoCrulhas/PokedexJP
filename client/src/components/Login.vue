@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit">
+    <b-form>
       
       <b-form-group id="email"
                     label="Email address:"
@@ -22,8 +22,7 @@
                       placeholder="Enter your password">
         </b-form-input>
       </b-form-group>
-      
-      <b-button type="submit" variant="primary">Login</b-button>
+      <b-button type="submit" @click="onSubmit"  variant="primary">Login</b-button>
     </b-form>
   </div>
 </template>

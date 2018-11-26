@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      
+      <b-alert :show="showAlertError" variant="danger">This e-mail already exist!</b-alert>
+
       <b-form-group id="email"
                     label="Email address:"
                     label-for="email">
@@ -45,8 +46,6 @@
                       placeholder="Enter your favourite pokemon">
         </b-form-input>
       </b-form-group>
-
-
       <b-form-group id="password"
                     label="Password:"
                     label-for="password">
@@ -54,8 +53,11 @@
                       type="password"
                       v-model="form.password"
                       required
-                      placeholder="Enter your password">
+                      :state="validatePassword"
+                      placeholder="Enter your password"
+                      aria-describedby="inputLiveHelp inputLiveFeedback">
         </b-form-input>
+        <b-form-invalid-feedback id="inputLiveFeedback">Enter at least 6 letters</b-form-invalid-feedback>
       </b-form-group>
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -76,15 +78,17 @@ export default {
         favouritePokemon: '',
         birthDate: '',
       },
-      show: true
+      show: true,
+      showAlertError:false
     }
   },
   methods: {
-      /* 
-        - Se o usuário foi criado, deve-se setar nos states da aplicação, todos os dados do usuário,
-      pois o login neste momento deve ser feito automaticamente;
-      */
     async onSubmit (evt) {
+      let checkEmailExist = await UserService.checkEmailExist(this.form.email)
+      if (typeof checkEmailExist.data.email !== 'undefined') {
+        this.showAlertError = true
+        return;
+      }
       let retornoPost = await UserService.createUser(this.form)
       if (retornoPost.status === 201) {
         this.$store.commit('LOGIN_USER', this.form) // Atualiza a informação do meu usuário  na minha store
@@ -104,7 +108,12 @@ export default {
       this.show = false;
       this.$nextTick(() => { this.show = true });
     }
-  }
+  },
+  computed: {
+    validatePassword() {
+       return this.form.password.length > 5 ? true : false
+    }
+  },
 }
 </script>
 
