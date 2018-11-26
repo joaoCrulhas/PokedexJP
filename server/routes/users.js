@@ -18,6 +18,11 @@ const verifyJWT = ((req, res, next) => {
 // Post User
 // router.post('/' ,verifyJWT ,userController.createUser); with auth;
 router.post('/', userController.createUser);
+// Get user info
+router.get('/:email', verifyJWT, userController.getUserInfo);
 
+router.get('/mypokemons/:iduser', verifyJWT, userController.getMyPokemons);
+
+router.post('/catchpokemon', verifyJWT, userController.catchPokemon);
 
 module.exports = router

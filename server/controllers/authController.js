@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 // Login and create a new jwt
 exports.login = ( async (req, res, next) => {
     let user = await userModel.find({ email: req.body.email })
-    console.log(user[0].password)
     if (user.length === 0) res.status(404).json({Error: 'User not found!'})
     if (user[0].password === req.body.password) {
         const id = user[0]._id;
