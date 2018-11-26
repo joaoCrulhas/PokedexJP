@@ -3,6 +3,7 @@
       <p> Hi, I'm Joao and this is a task that a made to practice my js skills.
 In this project I use the stack (Nodejs, MongoDB, VueJS and JWT). 
 <br>
+
 With Nodejs I created a REST API, with some endpoints and use Vuejs to consume this API.
 To auth the users I use JWT. <br>
 In this project, first, you need to sign up with some simple pieces of information about you, after this, It's possible you have a fun time with PokedexJP.
