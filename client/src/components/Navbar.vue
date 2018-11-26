@@ -16,7 +16,7 @@
                 <template slot="button-content">
                 <em> {{ userName }} </em>
                 </template>
-                <b-dropdown-item href="#"><router-link :to="{ name: 'Profile' }">Profile</router-link></b-dropdown-item>
+                <b-dropdown-item :to="{ name: 'Profile' }">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
             <b-nav-item-dropdown right v-else>
@@ -24,8 +24,8 @@
                 <template slot="button-content">
                 <em> Login </em>
                 </template>
-                <b-dropdown-item href="#"><router-link :to="{ name: 'Login' }">Login</router-link></b-dropdown-item>
-                <b-dropdown-item href="#"><router-link :to="{ name: 'Signup' }">Signup</router-link></b-dropdown-item>
+                <b-dropdown-item :to="{ name: 'Login'  }">Login</b-dropdown-item>
+                <b-dropdown-item :to="{ name: 'Signup' } ">Signup</b-dropdown-item>
             </b-nav-item-dropdown>
             </b-navbar-nav>
         </b-collapse>
