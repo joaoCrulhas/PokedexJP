@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @reset="onReset" v-if="show">
       <b-alert :show="showAlertError" variant="danger">This e-mail already exist!</b-alert>
 
       <b-form-group id="email"
@@ -59,7 +59,7 @@
         </b-form-input>
         <b-form-invalid-feedback id="inputLiveFeedback">Enter at least 6 letters</b-form-invalid-feedback>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="button" @click="onSubmit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
   </div>
@@ -83,17 +83,19 @@ export default {
     }
   },
   methods: {
-    async onSubmit (evt) {
+    async onSubmit () {
       let checkEmailExist = await UserService.checkEmailExist(this.form.email)
       if (typeof checkEmailExist.data.email !== 'undefined') {
         this.showAlertError = true
         return;
       }
+      
       let retornoPost = await UserService.createUser(this.form)
       if (retornoPost.status === 201) {
-        this.$store.commit('LOGIN_USER', this.form) // Atualiza a informação do meu usuário  na minha store
         let retornoAuth = await UserService.loginUserCreateToken(this.form)
         this.$store.commit('DEFINE_TOKEN' , retornoAuth.data.token)
+        let userInfo = await UserService.getUserInfo(this.form.email, retornoAuth.data.token)
+        this.$store.commit('LOGIN_USER', userInfo.data)
         this.$router.push('Profile') 
       }
     },

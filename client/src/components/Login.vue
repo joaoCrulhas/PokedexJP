@@ -45,8 +45,8 @@ export default {
       console.log('to aqui')
         let retornoAuth = await UserService.loginUserCreateToken(this.form)
         if (retornoAuth.status === 200) {
-          let userInfo = await UserService.getUserInfo(this.form.email, retornoAuth.data.token)
           this.$store.commit('DEFINE_TOKEN', retornoAuth.data.token)
+          let userInfo = await UserService.getUserInfo(this.form.email, retornoAuth.data.token)
           this.$store.commit('LOGIN_USER', userInfo.data)
           this.$router.push('Profile') 
         }

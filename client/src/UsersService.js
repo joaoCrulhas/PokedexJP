@@ -45,7 +45,7 @@ class UserService {
         const  config = {
             headers: {'x-access-token': tokenUser}
         }
-        return axios.get(`${urlApi}/joao.crulhas@gmail.com`, config)
+        return axios.get(`${urlApi}/${userEmail}`, config)
                                .then(response => response)
                                .catch(error => error)
     }
@@ -79,6 +79,7 @@ class UserService {
         const  config = {
             headers: {'x-access-token': tokenUser}
         }
+        console.log(` userID = ${userID}`)
 
         return await axios.post(`${urlApi}/catchpokemon`, {
             "id": userID,
@@ -87,6 +88,7 @@ class UserService {
     }
 
     static async getMyPokemons(userID, tokenUser) {
+        console.log(userID)
         const  config = {
             headers: {'x-access-token': tokenUser}
         }
